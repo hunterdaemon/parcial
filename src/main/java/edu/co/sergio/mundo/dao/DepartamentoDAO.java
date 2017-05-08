@@ -8,8 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import edu.co.sergio.mundo.vo.Departamento;
+import edu.co.sergio.mundo.vo.consulta3;
 import java.net.URISyntaxException;
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -102,6 +104,50 @@ public class DepartamentoDAO implements IBaseDatos<Departamento> {
                 
         return con2;
     }
+    
+    public LinkedList<consulta3> consulta3(){
+       
+        LinkedList<consulta3> c3 = new LinkedList<consulta3>();
+        
+        String query = "select nom_depto, tipo_contrato, count(*) as total from Depto join Empleado using (id_depto) group by nom_depto, tipo_contrato having count(*)>1";
+        Connection connection = null;
+            try {
+                connection = Conexion.getConnection();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(DepartamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+	    try {
+	    Statement st = connection.createStatement();
+	    ResultSet rs = st.executeQuery(query);
+	    String nom_dep = null;
+	    String tipodeco = null;
+	    int total=0;
+	    while (rs.next()){
+	    	
+	      
+	        
+	        nom_dep = rs.getString("nom_depto");
+	        
+	        
+	        tipodeco = rs.getString("tipo_contrato");
+	        
+                total=rs.getInt("total");
+                
+	        consulta3 registro= new consulta3(nom_dep, tipodeco, total);
+	      c3.add(registro);
+	    }
+	    st.close();
+	    
+	    } catch (SQLException e) {
+			System.out.println("Problemas al obtener la lista de Departamentos");
+			e.printStackTrace();
+		}
+	    
+	    return c3;
+    
+    
+    }
+    
     
 	/**
 	 * Funcion que permite obtener una lista de los departamentos existentes en la base de datos
