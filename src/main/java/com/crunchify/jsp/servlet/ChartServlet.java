@@ -50,7 +50,7 @@ public class ChartServlet extends HttpServlet {
                 Enumeration claves = c.keys();
                 
                 while(claves.hasMoreElements()){
-                    dataset.setValue((String)claves.nextElement()+1,c.get((String)claves.nextElement()+1));
+                    dataset.setValue((String)claves.nextElement(),c.get((String)claves.nextElement()));
                 }
         
 		boolean legend = true;

@@ -63,7 +63,6 @@ public class DepartamentoDAO implements IBaseDatos<Departamento> {
 			e.printStackTrace();
 		}
 	    
-                
         return con1;
     }
     
