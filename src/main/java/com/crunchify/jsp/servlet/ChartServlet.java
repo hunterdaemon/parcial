@@ -49,11 +49,10 @@ public class ChartServlet extends HttpServlet {
             
                 Enumeration claves = c.keys();
                 
-                while(claves.hasMoreElements()){
+                while(claves.hasMoreElements() == true){
                     dataset.setValue((String)claves.nextElement(),c.get((String)claves.nextElement()));
                 }
         
-               dataset.setValue("lol", 50);
 		boolean legend = true;
 		boolean tooltips = false;
 		boolean urls = false;
