@@ -44,7 +44,7 @@ public class ChartServlet extends HttpServlet {
                 DefaultPieDataset dataset = new DefaultPieDataset();
 	        //Crear la capa de servicios que se enlace con el DAO
                 DepartamentoDAO dep=new DepartamentoDAO();
-                Hashtable<String,Integer> c=dep.Consulta2();
+                Hashtable<String,Integer> c=dep.Consulta1();
 //                
             
                 Enumeration claves = c.keys();
