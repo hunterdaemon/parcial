@@ -53,7 +53,7 @@ public class ChartServlet extends HttpServlet {
                     dataset.setValue((String)claves.nextElement(),c.get((String)claves.nextElement()));
                 }
         
-               
+               dataset.setValue("lol", 50);
 		boolean legend = true;
 		boolean tooltips = false;
 		boolean urls = false;
