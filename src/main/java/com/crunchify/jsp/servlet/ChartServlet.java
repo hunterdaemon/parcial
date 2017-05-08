@@ -11,7 +11,9 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.servlet.http.HttpServlet;
@@ -42,15 +44,25 @@ public class ChartServlet extends HttpServlet {
                 DefaultPieDataset dataset = new DefaultPieDataset();
 	        //Crear la capa de servicios que se enlace con el DAO
                 DepartamentoDAO dep=new DepartamentoDAO();
-                LinkedList<consulta3> c=dep.consulta3();
-                for (int i = 0; i < c.size(); i++) {
-                    dataset.setValue(c.get(i).getNombreDepto(), c.get(i).getTotal());  
-            }
+                Hashtable<String,Integer> c=dep.Consulta1();
+//                LinkedList keys= new LinkedList();
+//                LinkedList values= new LinkedList();
+//                keys=(LinkedList) c.keySet();
+//                values= (LinkedList) c.values();
+            
+                Enumeration claves = c.keys();
+                while(claves.hasMoreElements()){
+                    dataset.setValue((String)claves.nextElement(),c.get((String)claves.nextElement()));
+                                     
+
+                }
+        
+               
 		boolean legend = true;
 		boolean tooltips = false;
 		boolean urls = false;
 
-		JFreeChart chart = ChartFactory.createPieChart("Cars", dataset, legend, tooltips, urls);
+		JFreeChart chart = ChartFactory.createPieChart("Grafica1", dataset, legend, tooltips, urls);
 
 		chart.setBorderPaint(Color.GREEN);
 		chart.setBorderStroke(new BasicStroke(5.0f));
