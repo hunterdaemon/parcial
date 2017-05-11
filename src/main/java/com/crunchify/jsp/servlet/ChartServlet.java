@@ -43,16 +43,19 @@ public class ChartServlet extends HttpServlet {
 		
                 DefaultPieDataset dataset = new DefaultPieDataset();
 	        //Crear la capa de servicios que se enlace con el DAO
+                
                 DepartamentoDAO dep=new DepartamentoDAO();
-                Hashtable<String,Integer> c=dep.Consulta1();
+                LinkedList c=(LinkedList) dep.Consulta1();
 //                
             
-                Enumeration claves = c.keys();
-                
-                while(claves.hasMoreElements()){
-                    dataset.setValue((String)claves.nextElement(),c.get((String)claves.nextElement()));
-                }
-        
+//                Enumeration claves = c.keys();  
+//                while(claves.hasMoreElements()){
+//                    dataset.setValue((String)claves.nextElement(),c.get((String)claves.nextElement()));
+//                }
+            for (int i = 0; i < c.size(); i=i+2) {
+                dataset.setValue((String)c.get(i), (Integer)c.get(i+1));
+            }
+            
 		boolean legend = true;
 		boolean tooltips = false;
 		boolean urls = false;

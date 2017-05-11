@@ -33,8 +33,8 @@ public class DepartamentoDAO implements IBaseDatos<Departamento> {
 
     
     
-    public  Hashtable <String,Integer> Consulta1(){
-         Hashtable <String,Integer> con1 =new Hashtable<String,Integer>(); 
+    public  List  Consulta1(){
+         List con1 =new LinkedList(); 
          String query = "select nom_proy, count(*) as total from  proyecto left join recurso using (id_proyecto) group by nom_proy";
          Connection connection = null;
          try {
@@ -53,8 +53,8 @@ public class DepartamentoDAO implements IBaseDatos<Departamento> {
 	         nom_proy = rs.getString("nom_proy");
 	         total = rs.getInt("total");
 	        
-	        con1.put(nom_proy,total);
-	        
+	        con1.add(nom_proy);
+	        con1.add(total);
 	    }
 	    st.close();
 	    
