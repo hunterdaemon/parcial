@@ -70,8 +70,8 @@ public class DepartamentoDAO implements IBaseDatos<Departamento> {
     
     
     
-    public  Hashtable <String,Integer> Consulta2(){
-         Hashtable <String,Integer> con2 =new Hashtable<String,Integer>(); 
+    public  List Consulta2(){
+         List  con2 =new LinkedList(); 
          String query = "select nom_depto,count(*) as Num from ((Depto natural join Proyecto) natural join DeptoProyecto )group by nom_depto";
          Connection connection = null;
          try {
@@ -90,8 +90,8 @@ public class DepartamentoDAO implements IBaseDatos<Departamento> {
 	        nom_depto = rs.getString("nom_depto");
 	         Num = rs.getInt("Num");
 	        
-	        con2.put(nom_depto,Num);
-	        
+	        con2.add(nom_depto);
+	        con2.add(Num);
 	    }
 	    st.close();
 	    
