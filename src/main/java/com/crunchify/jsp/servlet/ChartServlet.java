@@ -75,7 +75,7 @@ public class ChartServlet extends HttpServlet {
         arr =  (ArrayList) DepartamentoDAO.Consulta1();
         double[][] data = new double[1][arr.size()];
         for (int i = 0; i < arr.size(); i=i+2) {
-            data[0][i] =  (Integer )arr.get(i+1);
+            data[0][i] =  4+1;
         }
 
         CategoryDataset category = DatasetUtilities.createCategoryDataset(
