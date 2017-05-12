@@ -18,6 +18,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServlet;
@@ -70,12 +71,12 @@ public class ChartServlet extends HttpServlet {
         
     public JFreeChart getChart() throws URISyntaxException {
 
-        ArrayList arr = new ArrayList();
+        List arr = new LinkedList();
        DepartamentoDAO DepartamentoDAO = new DepartamentoDAO();
-        arr =  (ArrayList) DepartamentoDAO.Consulta1();
+        arr =   DepartamentoDAO.Consulta1();
         double[][] data = new double[1][arr.size()];
-        for (int i = 0; i < arr.size(); i++) {
-            data[0][i] = 5+i;
+        for (int i = 0; i < arr.size(); i=i+2) {
+            data[0][i] = (Integer)arr.get(i+1) ;
         }
 
         CategoryDataset category = DatasetUtilities.createCategoryDataset(
