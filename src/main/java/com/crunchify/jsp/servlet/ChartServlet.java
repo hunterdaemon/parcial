@@ -74,7 +74,7 @@ public class ChartServlet extends HttpServlet {
        DepartamentoDAO DepartamentoDAO = new DepartamentoDAO();
         arr =  (ArrayList) DepartamentoDAO.Consulta1();
         double[][] data = new double[1][arr.size()];
-        for (int i = 0; i < arr.size(); i=i+2) {
+        for (int i = 0; i < arr.size(); i++) {
             data[0][i] =  4+1;
         }
 
