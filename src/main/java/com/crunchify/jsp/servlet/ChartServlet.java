@@ -70,12 +70,12 @@ public class ChartServlet extends HttpServlet {
         
     public JFreeChart getChart() throws URISyntaxException {
 
-        LinkedList<consulta3> arr = new LinkedList();
+        ArrayList arr = new ArrayList();
        DepartamentoDAO DepartamentoDAO = new DepartamentoDAO();
-        arr =  DepartamentoDAO.consulta3();
+        arr =  (ArrayList) DepartamentoDAO.Consulta1();
         double[][] data = new double[1][arr.size()];
-        for (int i = 0; i < arr.size(); i++) {
-            data[0][i] =  arr.get(i).getTotal();
+        for (int i = 0; i < arr.size(); i=i+2) {
+            data[0][i] =  (Integer )arr.get(i);
         }
 
         CategoryDataset category = DatasetUtilities.createCategoryDataset(
