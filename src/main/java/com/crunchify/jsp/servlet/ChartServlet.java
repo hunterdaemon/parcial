@@ -81,7 +81,8 @@ public class ChartServlet extends HttpServlet {
 
         CategoryDataset category = DatasetUtilities.createCategoryDataset(
                 "Series",
-                "Category",
+                
+                "LOl",
                 data
         );
 
