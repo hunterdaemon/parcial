@@ -45,29 +45,40 @@ public class ChartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        	response.setContentType("image/png");
-		OutputStream outputStream = response.getOutputStream();
-		JFreeChart chart = null;
             try {
-                chart = getChart();
-            } catch (URISyntaxException ex) {
-                Logger.getLogger(ChartServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-		int width = 500;
-		int height = 350;
-		ChartUtilities.writeChartAsPNG(outputStream, chart, width, height);
+            response.setContentType("image/png");
+            OutputStream outputStream = response.getOutputStream();
+            JFreeChart chart = getChart();
+            int width = 500;
+            int height = 350;
+            ChartUtilities.writeChartAsPNG(outputStream, chart, width, height);
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(ChartServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//        	response.setContentType("image/png");
+//		OutputStream outputStream = response.getOutputStream();
+//		JFreeChart chart = null;
+//            try {
+//                chart = getChart();
+//            } catch (URISyntaxException ex) {
+//                Logger.getLogger(ChartServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//		int width = 500;
+//		int height = 350;
+//		ChartUtilities.writeChartAsPNG(outputStream, chart, width, height);
 
 	}
         
         
     public JFreeChart getChart() throws URISyntaxException {
 
-        ArrayList arr = new ArrayList();
+        LinkedList<consulta3> arr = new LinkedList();
        DepartamentoDAO DepartamentoDAO = new DepartamentoDAO();
-        arr = (ArrayList) DepartamentoDAO.Consulta1();
+        arr =  DepartamentoDAO.consulta3();
         double[][] data = new double[1][arr.size()];
-        for (int i = 0; i < arr.size(); i=i+2) {
-            data[0][i] = (Integer) arr.get(i+1);
+        for (int i = 0; i < arr.size(); i++) {
+            data[0][i] =  arr.get(i).getTotal();
         }
 
         CategoryDataset category = DatasetUtilities.createCategoryDataset(
@@ -77,7 +88,7 @@ public class ChartServlet extends HttpServlet {
         );
 
         JFreeChart chart = ChartFactory.createBarChart(
-                "Cantidad de elementos por área", // chart title
+                "Grafico", // chart title
                 "Area", // domain axis label
                 "Elementos", // range axis label
                 category, // data
@@ -107,10 +118,10 @@ public class ChartServlet extends HttpServlet {
         plot.setRenderer(renderer);
 
         // change the margin at the top of the range axis...
-            org.jfree.chart.axis.ValueAxis rangeAxis = plot.getRangeAxis();
-        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        rangeAxis.setLowerMargin(0.15);
-        rangeAxis.setUpperMargin(0.15);
+       org.jfree.chart.axis.ValueAxis rangAxis = plot.getRangeAxis();
+        rangAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        rangAxis.setLowerMargin(0.15);
+        rangAxis.setUpperMargin(0.15);
 
         return chart;
 
