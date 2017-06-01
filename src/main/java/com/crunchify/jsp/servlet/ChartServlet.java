@@ -73,7 +73,7 @@ public class ChartServlet extends HttpServlet {
 
         List arr = new LinkedList();
        DepartamentoDAO DepartamentoDAO = new DepartamentoDAO();
-        arr =   DepartamentoDAO.Consulta1();
+        arr =   DepartamentoDAO.findAll();
         double[][] data = new double[1][arr.size()-2];
         int j=0;
         for (int i = 0; i < arr.size(); i=i+2) {
